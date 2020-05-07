@@ -1,12 +1,13 @@
 {
   "name": "node-red-contrib-sleep-timer",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A timer that works like a TV sleep timer.",
   "main": "sleep-timer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Adrian Carpenter",
+  "homepage": "https://github.com/fizzyade/node-red-contrib-sleep-timer",
   "license": "MIT",
   "keywords": [ "node-red" ],
   "node-red" : {
