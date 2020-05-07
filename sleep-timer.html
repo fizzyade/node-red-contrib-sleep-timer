@@ -1,0 +1,87 @@
+<script type="text/javascript">
+	RED.nodes.registerType('sleep-timer',{
+		category: 'function',
+		color: '#a6bbcf',
+		defaults: {
+			defaultPeriod: {value:"60"},
+			defaultAdjustment: {value:"15"},
+			name: {value:""}
+		},
+		outputLabels: ["Control", "Tick", "Set"],
+		inputs:1,
+		outputs:3,
+		icon: "font-awesome/fa-clock-o",
+		label: function() {
+			return this.name || "sleep-timer";
+		}
+	});
+</script>
+
+<script type="text/html" data-template-name="sleep-timer">
+    <div class="form-row">
+        <label for="node-input-defaultPeriod"><i class="fa fa-tag"></i> Default Period</label>
+        <input type="string" id="node-input-defaultPeriod" placeholder="60">
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-defaultAdjustment"><i class="fa fa-tag"></i> Default Adjustment</label>
+        <input type="string" id="node-input-defaultAdjustment" placeholder="15">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="string" id="node-input-name" placeholder="sleep-timer">
+    </div>
+    
+</script>
+
+<script type="text/html" data-help-name="sleep-timer">
+<p>Creates a timer that works like a traditional TV timer.</p>
+
+<h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt class="optional">topic
+            <span class="property-type">string</span>
+        </dt>
+        <dd> the operation to perform on the timer</dd>
+        <dt class="optional">payload
+            <span class="property-type">number</span>
+        </dt>
+        <dd> the number of minutes used by the control message.</dd>
+    </dl>
+
+ <h3>Outputs</h3>
+     <ol class="node-ports">
+         <li>Control
+             <dl class="message-properties">
+                 <dt>payload <span class="property-type">string</span></dt>
+                 <dd>control messages from the timer.</dd>
+             </dl>
+         </li>
+         <li>Tick
+             <dl class="message-properties">
+                 <dt>payload <span class="property-type">number</span></dt>
+                 <dd>the number of seconds remaining on the timer, this output
+                 is updated every second.</dd>
+             </dl>
+         </li>
+         <li>Set
+             <dl class="message-properties">
+                 <dt>payload <span class="property-type">number</span></dt>
+                 <dd>the number of seconds that the timer has been set to when
+                 changed by set, increment or decrement.</dd>
+             </dl>
+         </li>
+     </ol>
+
+<h3>Details</h3>
+    <p><code>msg.topic</code> is used to signify the operation on the timer, this
+    should be set to start, stop, increment, decrement or remaining.</p>
+    <p>
+    <p><code>msg.payload</code> is used as the for start, stop, increment and decrement 
+    topics as specifies the number of minutes to set or adjust the timer by.
+    <p?>The timer includes properties for default values for set and adjust, if a payload
+    if not supplied for the set, increment or decrement commands then these values
+    will be used.</p?>
+</script>
+
