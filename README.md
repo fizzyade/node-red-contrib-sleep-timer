@@ -9,15 +9,15 @@ The project homepage is https://github.com/fizzyade/node-red-contrib-sleep-timer
 * Easy to use, specicifically designed to operate as a TV sleep timer and requires no extra logic to be added which would be required when using a generic timer module.
 * Provides methods for *starting*, *stopping*, *querying*, *incrementing* and *decrementing* the timer.
 * Has 3 outputs to enable easy interfacing
-  * Control - the control output provides state change messages.
-  * Tick - the tick output provides information as the timer counts down.
-  * Set - the set output provides information when the timer duration is set.
+  * Control - the control output provides state change messages ("started", "stopped", or "timeout").
+  * Tick - the tick output provides information as the timer counts down (number of seconds left).
+  * Set - the set output provides information when the timer duration is set (number of seconds left) (outputs when timer receives **start**, **increment**, **decrement**, or **remaining** message).
 
 ### Behaviour
 
 The logic on the sleep timer is as follows:
 
-* When a **start** message is received the timer will be set to either the default or payload timeout period (if supplied).
+* When a **start** message (msg.topic) is received the timer will be set to either the default or payload timeout period (if supplied in msg.payload).
 
   ***Notes:***
 
@@ -27,7 +27,7 @@ The logic on the sleep timer is as follows:
 
   *A message containing the new timeout value will be output on the Set output.*
 
-* When a **stop** message is received the timer will be stopped.  
+* When a **stop** message (msg.topic) is received the timer will be stopped.  
 
   ***Notes:***
 
@@ -53,7 +53,7 @@ The logic on the sleep timer is as follows:
 
   *A message containing the new timeout value will be output on the Set output providing the timer was not stopped by the decrement command.*
 
-* When a **remaining** message is received, the timer will output the current timeout value
+* When a **remaining** message is received, the timer will output the current timeout value on the set output.
 
 ### Configuration
 
